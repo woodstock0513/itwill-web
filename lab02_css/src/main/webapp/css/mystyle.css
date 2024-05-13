@@ -1,0 +1,25 @@
+@charset "UTF-8"; /* CSS 파일 인코딩 선언*/
+
+
+
+/*
+ CSS 문법
+ selector{
+    property : value;
+    ...
+}
+
+
+*/
+
+
+
+body {
+    background-color: silver;
+    
+}
+div {
+    border: 2px solid white;
+    margin: 8px;
+    padding: 5px;
+}
