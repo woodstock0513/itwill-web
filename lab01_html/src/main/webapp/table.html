@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Table</title>
+        <style>
+            table, th, td {
+                border : 1px solid black;
+                border-collapse: collapse;
+            }
+        
+        </style>
+	</head>
+	<body>
+		<h1>테이블</h1>
+        
+        <a href="index.html">인덱스 페이지</a>
+        
+        <table>
+            <caption> 프론트 엔드 과목 </caption>
+            <thead> <!-- 테이블 헤더: 컬럼 이름 -->
+                <tr> <!-- table row -->
+                    <th>번호</th>
+                    <th>HTML</th>
+                    <th>CSS</th>
+                    <th>JavaScript</th>
+                </tr>
+            </thead>
+            <tbody> <!-- 테이블 몸통 : 데이터(행과 열) -->
+                <tr>
+                    <th>1</th> <!-- table data (table set) -->
+                    <td>10</td>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>10</td>
+                </tr>            
+            </tbody>
+            <tfoot> <!-- 테이블 푸터: 합계같은거  -->
+                <tr>
+                    <th>합계</th> <!-- table data (table set) -->
+                    <td>25</td>
+                    <td>20</td>
+                    <td>25</td>
+                </tr>            
+            
+            </tfoot>
+        </table>
+        <hr/>
+        <h1>column span</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th colspan="2">전화번호</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>hong</td>
+                    <td>010-1234-5678</td>
+                    <td>02-1234-5678</td>
+                </tr>
+                <tr>
+                    <td>itwill</td>
+                    <td>010-0000-0000</td>
+                    <td>02-0000-0000</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <h1>row span</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <th>이름</th>
+                    <td>홍길동</td>
+                    <td>아이티윌</td>
+                </tr>
+               <tr>
+                    <th rowspan="2">전화번호</th>
+                    <td>010-1234-5678</td>
+                    <td>010-0000-0000</td>
+                </tr>
+                <tr>
+                    <td>02-1234-5678</td>
+                    <td>02-0000-0000</td>
+                </tr>
+            </tbody>
+              
+        </table>
+        
+        
+	</body>
+</html>

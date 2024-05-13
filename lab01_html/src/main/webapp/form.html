@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>HTML Form</title>
+	</head>
+	<body>
+		<a href="index.html">인덱스 페이지</a>
+        <h1>폼 양식</h1>
+        <!-- 
+        클라이언트(브라우저, 앱)에서 사용자의 입력을 받아서 입력 내용을 서버로 전송하는 방법
+        1. GET 방식: 
+            클라이언트가 서버로 보내는 양식(form) 데이터를
+            요청주소(URL)의 질의 문자열(query string)에 포함시켜서 전송하는 방식
+            (예) 검색어 전송.
+        2. POST 방식:
+            클라이언트가 서버로 보내는 양식 데이터를 요청주소에 노출시키지 않고
+            요청 패킷의 몸통(body)에 포함시켜서 전송하는 방식
+            예> 로그인(아이디, 비밀번호 전송)
+        3. form 의 기본전송(디폴트) 방식은  get -> 아무것도 안 쓰면 get 반식인거
+        ㅁaction -> 서버에서 이동할 페이지
+        
+        URL 형식
+        0. 프로토콜://서버이름(ip주소):포트번호/경로?질의문자열 - ?로 경로와 질의 문자열 구분.
+        ex) https://www.google.com/search?q=happy
+        ex) https://localhost:8080/lab01_html/result.html?keyword=happy
+        
+        0. 프로토콜 : http, https
+        s는 secure 보안 프로토콜
+        
+        0. 서버 ip 주소를 직접 사용할 수도 있지만, 일반적으로는 dms에 등록된 도메인 이름을 사용
+        0. 포트번호 80은 생략가능
+        0. 요청 경로와 질의 문자열은 ?로 구분
+        
+        0. 질의 문자열은 "파라미터=값&파라미터=값&..." 형식으로 작성
+        파라미터와 파라미터는 &로 구분한다.
+         -->
+        
+        <h2>GET 방식 전송</h2>
+        <form method="get" action="result.html">
+            <input type="text" name="keyword" /> <!-- text: 입력받은 값 전달 -->
+            <input type="submit" value="검색" />
+        </form>
+        
+        <h2>POST 방식 전송</h2>
+        <form method="post" action="result.html">
+            <input type="text" name="id" />
+            <input type="password" name="pwd" />
+            <input type="submit" value="login" />        
+        </form>
+        
+        <h2>여러가지 입력 타입</h2>
+        <form action="result.html"> <!-- method 생략하면 get -->
+            <input type = "text" name="id" placeholder="아이디" required/>
+            <br/>
+            <input type="password" name="psd" placeholder="비밀번호" />
+            <br/>   
+            <input type="number" name="age" placeholder="나이" />
+            <br/>
+            <input type="email" name="email" placeholder="이메일">
+            <br/>
+            <input type="date" name="birthdate">
+            <br/>
+            <input type="datetime-local" name="created-time">
+            <br/>
+            <input type="radio" name="ad" value="T" id="radio1" />
+            <label for="radio1">수신 허용</label>
+            <input type="radio" name="ad" value="F" id="radio2" checked/>
+            <label for="radio2">수신 거부</label>
+            <br/>
+            <input type="radio" name="gender" value="m" id="man"/>
+            <label for="man">남성</label>
+            <input type="radio" name="gender" value="w" id="woman"/>
+            <label for="woman">여성</label>
+            <br/>
+            <input type="checkbox" name="hobby" value="1" id="ch1"/>
+            <label for="ch1">영화</label>
+            <input type="checkbox" name="hobby" value="2" id="ch2"/>
+            <label for="ch2">음악</label>
+            <input type="checkbox" name="hobby" value="3" id="ch3"/>
+            <label for="ch3">독서</label>
+            <input type="checkbox" name="hobby" value="4" id="ch4"/>
+            <label for="ch4">코딩</label>
+            <br/>
+            <!-- 콤보박스, 목록상자 -->
+            <select name="domain">
+                <option value="www.naver.com">네이버</option>
+                <option value="www.kakao.com">카카오</option>
+                <option value="google.com">구글</option>
+            </select>
+            <br/>
+            <!-- 여러 줄 입력 상자 -->
+            <textarea rows="5" cols="60" name="memo" placeholder="memo"></textarea>
+            
+            <input type="submit" value="제출" /> <!-- form의 action 속성에 설정된 페이지로 요청을 보냄 -->
+            <input type="reset" value="취소" /> <!-- 모든 입력 필드의 값들을 지움 -->
+        
+        
+        </form>
+	</body>
+</html>
