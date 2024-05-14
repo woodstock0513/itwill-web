@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pseudo Selector</title>
+        
+        <style type="text/css">
+        table#tbl-mem, table#tbl-mem th, table#tbl-mem td { /* tbl-mem의 자손 중 th, td 선택*/
+            border: 2px solid darkgray;
+            border-collapse: collapse;
+        
+        }
+        
+        table#tbl-blog {
+            width: 100% /* 브라우저에서 사용가능한 가로 길이의 100%를 사용*/ 
+        }
+        table#tbl-blog, table#tbl-blog th, table#tbl-blog td {
+            border-bottom: 1px solid crimson;
+            border-collapse: collapse; 
+        }
+        
+        table#tbl-blog th{
+            background-color: darkseagreen;
+            color : white;  
+            text-align: left;
+        }
+        
+        table#tbl-blog > tbody > tr:nth-child(even){ /* blog의 tbody의 tr. 그 중 짝수번째*/
+            background-color: #edefef;
+        }
+        
+        table#tbl-blog > tbody > tr:hover {
+            background-color: #adad15;
+        }
+        
+        </style>
+        
+        
+	</head>
+	<body>
+		<nav>
+            <a href="index.html">index page</a>
+        </nav>
+        <main>
+            <h1>table style</h1>
+            <table id="tbl-mem">
+                <caption>회원정보</caption>
+                <thead>
+                    <tr> <!-- table row -->
+                        <th>이름</th>
+                        <th>연락처</th>
+                        <th>닉네임</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ad</td>
+                        <td>ad</td>
+                        <td>ad</td>
+                    </tr>
+                    <tr>
+                        <td>gf</td>
+                        <td>agf</td>
+                        <td>afd</td>
+                    </tr>
+                    <tr>
+                        <td>tre</td>
+                        <td>tre</td>
+                        <td>atee</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <table id="tbl-blog">
+                <caption>블로그</caption>
+                <thead>
+                    <tr> <!-- table row -->
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>ad</td>
+                        <td>ad</td>
+                        <td>fdsf</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>gf</td>
+                        <td>agf</td>
+                        <td>afd</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>tre</td>
+                        <td>tre</td>
+                        <td>atee</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>tgfd</td>
+                        <td>gdgdf</td>
+                        <td>gaerf</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+            
+        </main>
+	</body>
+</html>

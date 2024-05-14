@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pseudo Selector</title>
+        <style type="text/css">
+        div {
+            margin-top: 15px;
+        }
+        /* 
+        가상 선택자 :이벤트 또는 특정 조건을 만족하는 요소를 찾는 방법
+        문법 -> selector:pseudo-selector
+        가상 선택자 종류:
+        0. visited: 방문했던 사이트
+        0. link: 방문하지 않았던 사이트
+        0. hover: 마우스가 요소 위에 있을 떄
+        0. active: 마우스 버튼을 누르고 있을 때
+        0. nth-child(arg) 조건을 만족하는 자식요소들을 찾을 때 - 주로 테이블에서
+        */
+        a#link-naver {
+            color: green;
+            text-decoration: none;
+        }
+        /* id가 link-naver인 a 태그 위에 마우스가 위치했을 때 */
+        a#link-naver:hover {
+            color: fuchsia;
+            font-style: italic;
+            font-weight: bold;
+        }
+        a#link-naver:active {
+            color: red;
+        }
+        
+        a#link-daum{
+            text-decoration: none;
+            color:lime;
+            background-color: dodgerblue;
+            font-weight: bold;
+            padding: 4px 8px; /* top, right, bottom, left. 위에서부터 시계방향으로 4 8 4 8 이렇게 들어감*/
+            display: inline-block; /* inline 요소의 크기를 조절하기 위해서*/
+            text-align:center;
+            width: 80px;
+        }
+        
+        /*
+        HTML/CSS display 속성(property)
+        1. block - div, main, nav, section, list, table, ...
+        - 이전 요소의 아래쪽에 배치
+        - 가로, 세로, margin, padding을 변경할 수 있음
+        2. inline - span, a, string, em, ...
+        - 이전 요소의 오른쪽에 배치
+        - 가로, 세로는 변경 불가. margin, padding은 변경 가능
+        3. inline-block
+        - 이전 요소의 오른쪽에 배치 (inline 배치 속성)
+        - 가로, 세로, margin, padding 변경 가능 (block 크기 변경 속성)
+        4. none - display하지 않겟다! 요소가 차지하는 크기(가로,세로)가 없음
+        
+        */
+        
+        a#link-daum:hover {
+            color: darkgreen;
+        }
+        
+        </style>
+	</head>
+	<body>
+		<nav>
+            <a href="index.html">index page</a>
+        </nav>
+        <main>
+            <h1>Pseudo Selector</h1>
+            <h3>link style</h3>
+            <div>
+                <a id="link-naver" href="https://www.naver.com">naver</a>
+            </div>
+            <div>
+                <a id="link-daum" href="https://www.daum.net">daum</a>
+            </div>
+        </main>
+	</body>
+</html>
