@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS 조건문</title>
+	</head>
+	<body>
+		<nav>
+            <a href="index.html">index page</a>
+        </nav>
+        
+        <main>
+            <h1>JavaScript 조건문</h1>
+            
+            <input type="number" id="numberInput" placeholder="정수를 입력하세요."/>
+            <button onclick="checkEven()">짝수? 홀수?</button>
+            <button onclick="checkPositive()">양수? 음수?</button>
+            <button onclick="checkEven2()">삼항 연산자</button>
+            <div id="result">결과</div>
+        </main>
+        
+        <!-- HTML 문서에서 JS 코드 작성. script 이용 -->
+        <script type="text/javascript">
+        const x = 1; // 값을 변경할 수 없는 변수 선언
+        // x=3; -> 실행 중 에러 발생(const로 선언된 변수의 값은 재할당할 수 없음)
+        console.log('x = ',x); // 쉼표로만 구분하면 됨. 로그로 디버깅할 때 사용.
+        let y = 100; //값을 변경할 수 있는 변수 선언
+        console.log('y = ',y)
+        y = 'hello'; // 값을 재할당할 때 다른 타입으로 바뀔 수 있음.
+        console.log('y = ',y)
+        
+        
+        //numberInput 요소를 찾음
+        const numberInput = document.getElementById('numberInput');
+		const result =  document.getElementById('result');
+        
+        function checkEven() {
+			const number = numberInput.value; //numberInput에 입력된 값
+			console.log('number = ',number);
+			if(number %2 === 0){ // =를 3개 쓰는 이유 : 
+				result.innerHTML = '짝수';
+			} else {
+				result.innerHTML = '홀수';
+			}
+			
+		}
+        
+        function checkPositive() {
+        	//const number = numberInput.value;
+        	const number = Number(numberInput.value); //일케 하면 number로 가져와서 === 됨
+        	if (number>0){
+        		result.innerHTML = "양수";
+        	} else if (number === 0) { //value는 문자열로 읽어오기 때문에 ===를 쓰면 안됨,,
+        		result.innerHTML = "0";
+        	} else {
+        		result.innerHTML = "음수";
+        	}
+		}
+        
+        function checkEven2() {
+			const number = Number(numberInput.value);
+			result.innerHTML = (number % 2) ? 'odd' : 'even';
+			// (number%2 === 1) ? 'even' : 'odd'; 도 가능
+		}
+        
+        
+        
+        /*
+        연산자
+        = : 할당 연산자.
+        비교 연산자: ==, ===, !=, !==, >, <, >=, <=, ...
+        (1) 값과 타입을 함께 비교할 때 : ===, !==
+        (2) 값만 비교할 때. 자바스크립트가 타입을 암묵적으로 변환한 값만 비교 : ==, !=
+        */
+        
+        console.log(1==='1'); // 타입이 다르니가 F
+        console.log(1=='1'); // 타입은 js가 알아서 바꿔주고, 값만 비교. 같으니까 T
+		
+			if(number%2){ //if문 안에 숫자가 나옴. 0이 false, 0외의 숫자는 true
+                result.innerHTML = '홀수';
+            } else {
+                result.innerHTML = '짝수';
+            }
+		
+        
+        //java는 조건식의 결과가 반드시 T/F여야 함. 
+        //javaScript는 F인 값들이 정해져있음.
+        // 숫자 0, 빈 문자열 "", 비어있는 배열 [], null, undefined(값이 할당되지 않은 변수)
+        
+        
+        /*
+        프로그래밍 언어 종류 1:
+        (1) 컴파일 언어: 소스코드를 컴파일해서 실행가능한 바이너를 만들고 실행하는 언어
+        - Java의 경우: *.java ==[compile]==> *.class ==[실행]==> 프로그램 실행
+         - C, C++, C#, Kotlin, Swift, ...
+        (2) 스크립트 언어(interpreter 언어):소스 코드를 한 문장씩 번역해서 실행하는 언어
+         - JavaScript, Python, ...
+        compile 일어나지 않음
+        
+        프로그래밍 언어 종류 2:
+        (1) 정적 타이핑(static typing) 언어:
+        	- 변수를 선언할 때 변수의 타입이 결정되고, 결정된 변수 타입을 바꿀 수 없는 언어 
+        	- Java, C, C++, ... 대부분의 컴파일 언어들.
+        (2) 동적 타이핑(dynamic typing) 언어:
+        	- 변수를 선언할 때 변수 타입이 결정되지 않고, 값을 할당할 때 그 변수의 타입이 정해지는 언어
+        	- 대부분의 스크립트 언어
+        	
+        	
+        */
+        
+        
+        </script>
+	</body>
+</html>
