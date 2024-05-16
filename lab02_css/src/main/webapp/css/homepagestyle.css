@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+body {
+    background-color: lemonchiffon;
+}
+
+#profilepic{
+    float: left;
+    margin: 10px;
+}
+
+#char{
+    clear: both;
+}
+
+
+.profile{
+    
+    margin: 10px;
+}
+
+#info{
+    width: 350px;
+    height: 220px;
+    background-color: peachpuff;
+}
+
+
+table#tbl-info, table#tbl-info td{
+    border: 2px solid crimson;
+    border-collapse: collapse;
+}
+
+table#tbl-char, table#tbl-char td{
+    border: 2px solid olive;
+    border-collapse: collapse;
+}
+
+#tbl-info{
+    width: 50%;
+    height: 100px;
+    
+}
+
