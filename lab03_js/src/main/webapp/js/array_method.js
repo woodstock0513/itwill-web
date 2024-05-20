@@ -1,7 +1,6 @@
 /**
 array_method.html에 포함.
 JS array 객체의 함수(메서드)들.
-
  */
 
 
@@ -78,13 +77,62 @@ console.log(squares);
 result = numbers.map((x)=> x*x);
 console.log(result);
 
-numbers.forEach((x)=> console.log(x));
+numbers.forEach((x)=> console.log(x)); 
 //numbers의 각각의 원소에 대해 ()안의 행동을 함.
 
+//reduce 합계 계산 시 사용
+let sum = 0;
+for (let val of numbers){
+    sum+= val; //sum = sum + val
+}
+console.log(`sum = ${sum}`);
+
+sum = numbers.reduce((acc,cur) => acc + cur, 0); //acc는 리턴값.
+//reduce(callback, initialValue) //acc의 첫번째 값 =  initialValue. 그 이후로는 리턴값.
+console.log(`sum = ${sum}`);
+
+//numbers의 모든 원소들의 곱
+let multi = 1;
+for (let val of numbers){
+    multi = multi * val; //sum = sum + val
+}
+console.log(`multiply = ${multi}`);
+
+multi = numbers.reduce((acc,cur) => acc * cur, 1);
+console.log(`multiply = ${multi}`);
+
+//numbers의 원소 중에서 짝수들의 합
+let even = [];
+
+//한 줄 컷.
+//result = numbers.filter((x)=>x%2===0).reduce((acc,cur) => acc + cur, 0);
+
+even = numbers.filter(function(x){
+    if (x%2===0){
+        return x;
+    }
+});
+let evenSum = 0;
+evenSum = even.reduce((acc,cur) => acc + cur, 0);
+console.log(`짝수의 합 = ${evenSum}`);
+
+//numbers의 원소의 제곱의 합
+
+//result = numbers.map((x)=>x*x).reduce((acc,cur)=>acc+cur,0);
+
+let square = [];
+square = numbers.map((x)=>x*x);
+let squareSum = 0;
+squareSum = square.reduce((acc,cur)=>acc+cur,0);
+console.log(`제곱의 합 = ${squareSum}`);
 
 
+//numbers의 원소 중에서 짝수들의 제곱의 합
 
+//result = numbers.filter((x)=>x%2===0).reduce((acc,cur) => acc * cur, 1);
 
-
+let evenSquare = 0;
+evenSquare = even.reduce((acc,cur)=>acc*cur,1);
+console.log(`짝수의 제곱의 합 = ${evenSquare}`)
 
 
