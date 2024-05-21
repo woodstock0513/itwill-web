@@ -28,7 +28,7 @@ btnInput.addEventListener('click', function(){
 
 const input = document.querySelector('input#itemInput2');
 input.addEventListener('keydown', function(e){
-    if (e.keyCode == 13){
+    if (e.keyCode == 13){ //e.key==='Enter'
         const itemList2 = document.querySelector('ul#itemList2');
         itemList2.innerHTML += `<li>${input.value}</li>`;
         input.value = '';
@@ -42,10 +42,8 @@ const userNameInput = document.querySelector('input#username');
 const output = document.querySelector('div#output');
 userNameInput.addEventListener('change',function(e){
     output.textContent = e.target.value;
+    //output.innerHTML = userNameInput.value; 으로 써도됨
 }); 
-
-
-
 
 // TODO: img#bulb 요소에 'mouseenter' 이벤트 리스너를 등록:
 // img의 src를 'images/bulb_on.gif'로 변경.
@@ -58,9 +56,7 @@ bulb.addEventListener('mouseenter', function(e){
 // TODO: img#bulb 요소에 'mouseleave' 이벤트 리스너를 등록:
 // img의 src를 'images/bulb_off.gif'로 변경.
 
-bulb.addEventListener('mouseleave', function(e){
-    bulb.src = 'images/bulb_off.gif';
-});
+bulb.addEventListener('mouseleave', () => {bulb.src = 'images/bulb_off.gif';});
 
 
 
