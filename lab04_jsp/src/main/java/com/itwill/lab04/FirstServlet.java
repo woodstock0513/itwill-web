@@ -35,7 +35,7 @@ public class FirstServlet extends HttpServlet {
     	System.out.println("FirstServlet::doGet() 호출");
     	
     	response.setContentType("text/html; charset=UTF-8");
-    	//텍스트!!!! html!!!! not test!!    	
+    	//텍스트!!!! html!!!! not test!!    		
     	
 		response.getWriter() //html 문서를 만드는 코드. 만들어서  response한것!
 			.append("<!doctype html>")
