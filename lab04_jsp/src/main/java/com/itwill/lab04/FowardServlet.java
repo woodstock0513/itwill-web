@@ -30,7 +30,7 @@ public class FowardServlet extends HttpServlet {
 		// -> 서블릿이 jsp로 요청을 전달하고 jsp가 html 코드를 작성하는 것이 낫겟다!
 		// 전달만 잘 하면 됨.
 		request.getRequestDispatcher("example.jsp").forward(request, response);
-		
+		        // 이동한 페이지를 아규먼트로 가지는 메서드
 		// foward 방식의 웹페이지 이동
 		// - 같은 was의 웹 앱플리케이션 안에서만 페이지를 이동하는 방식
 		// - 최초 요청 주소가 바뀌지 않음 (ex3 유지!)
