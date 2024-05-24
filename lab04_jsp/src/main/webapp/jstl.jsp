@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%> 
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <title>JSTL</title>
 </head>
 <body>
-    <%@ include file="header.jspf" %>
+    <%@ include file="header.jspf"%>
     <main>
         <h1>JSTL(JSP Standard Tag Library)</h1>
         <%-- JSTL 라이브러리 사용하기
@@ -19,34 +19,39 @@
             - org.glassfish.web:jakarta.servlet.jsp.jstl3.0.1
         2. JSTL을 사용하는 JSP 파일에서 <%@ taglib prefix="" uri=""%> 지시문을 설정.
          --%>
-         
-         
-         <%
-         String[] sns = {"insta", "facebook", "x"};
-         pageContext.setAttribute("sns", sns); // 속성이름을 sites로 바꾸면 jstl 부분도 바꿔줘야함
-         %>
+
+
+        <%
+        String[] sns = { "insta", "facebook", "x" };
+        pageContext.setAttribute("sns", sns); // 속성이름을 sites로 바꾸면 jstl 부분도 바꿔줘야함
+        %>
         <h2>scriptlet, expression을 사용한 리스트</h2>
         <ul>
-            <% for (String s : sns) { %>
-                <li><%= s %></li>
-            <% } %>
+            <%
+            for (String s : sns) {
+            %>
+            <li><%=s%></li>
+            <%
+            }
+            %>
         </ul>
-        
+
         <h2>JSTL, EL을 사용한 리스트</h2>
         <ul>
-            <c:forEach items="${ sns }" var="s"> <%-- var이 items 앞에 있어도 무관. --%>
+            <c:forEach items="${ sns }" var="s">
+                <%-- var이 items 앞에 있어도 무관. --%>
                 <li>${ s }</li>
             </c:forEach>
         </ul>
-        
+
         <%
         ArrayList<Contact> data = new ArrayList<>();
-        for (int i = 1; i<11; i++){
-        	   data.add(new Contact(i, "name_"+i, "phone_"+i*10, "email_"+i*100));
+        for (int i = 1; i < 11; i++) {
+        	data.add(new Contact(i, "name_" + i, "phone_" + i * 10, "email_" + i * 100));
         }
         pageContext.setAttribute("contactlist", data);
         %>
-        
+
         <h2>scriptlet, expression을 사용한 table</h2>
         <table>
             <thead>
@@ -58,21 +63,25 @@
                 </tr>
             </thead>
             <tbody>
-                <% for (Contact c : data) {%>
-                    <tr>
-                        <td><%= c.getId() %></td>
-                        <td><%= c.getName() %></td>
-                        <td><%= c.getPhone() %></td>
-                        <td><%= c.getEmail() %></td>
-                    </tr>
-                <% } %>
+                <%
+                for (Contact c : data) {
+                %>
+                <tr>
+                    <td><%=c.getId()%></td>
+                    <td><%=c.getName()%></td>
+                    <td><%=c.getPhone()%></td>
+                    <td><%=c.getEmail()%></td>
+                </tr>
+                <%
+                }
+                %>
             </tbody>
-        
+
         </table>
-            
-        
+
+
         <h2>JSTL, EL을 사용한 table</h2>
-        
+
         <table>
             <thead>
                 <tr>
@@ -85,17 +94,32 @@
             <tbody>
                 <c:forEach items="${ contactlist }" var="c">
                     <tr>
-                        <td>${c.id }</td> <%-- 이게 곧 getter 호출 --%>
-                        <td>${c.name }</td> <%-- EL은 프로퍼티 이름으로 getter 메서드를 찾음! --%>
-                        <td>${c.phone }</td> <%-- 근데,, getter, setter 이상하게 만들면 잘 안됨 --%>
-                        <td>${c.email }</td> <%-- 아까 앞에서 _id 햇던 것처럼 --%>
+                        <td>${c.id }</td>
+                        <%-- 이게 곧 getter 호출 --%>
+                        <td>${c.name }</td>
+                        <%-- EL은 프로퍼티 이름으로 getter 메서드를 찾음! --%>
+                        <td>${c.phone }</td>
+                        <%-- 근데,, getter, setter 이상하게 만들면 잘 안됨 --%>
+                        <td>${c.email }</td>
+                        <%-- 아까 앞에서 _id 햇던 것처럼 --%>
                     </tr>
                 </c:forEach>
             </tbody>
-        
+
         </table>
-        
-        
+        <h2>url 태그</h2>
+        <a href="result.jsp?username=gu&est&color=crimson">click1</a>
+
+        <%-- URL 쿼리스트링의(질의 문자열) 요청 파라미터 값에 특수 문자 기호가 포함 될 때 사용  --%>
+        <c:url value="result.jsp" var="url">
+            <!-- 질의 문자열 전까지의 경로를 적으면 됨. var는 변수이름 -->
+            <c:param name="username" value="admin" />
+            <c:param name="color" value="crimson" />
+        </c:url>
+        <a href="${ url }">클릭2</a>
+        <!-- 변수이름 var를 {}안에 써주면 됨. ?와 &는 자기가 알아서 붙인다고 함.-->
+
+
     </main>
 </body>
 </html>
