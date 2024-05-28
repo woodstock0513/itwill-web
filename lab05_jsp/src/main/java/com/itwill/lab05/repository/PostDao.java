@@ -54,6 +54,8 @@ public enum PostDao {
 	private static final String SQL_INSERT = "insert into posts (title, content, author) values (?, ?, ?)";
 	
 	public int insert(Post post) {
+		log.debug("insert");
+		log.debug(SQL_INSERT);
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -78,6 +80,7 @@ public enum PostDao {
 	
 	public int delete(int id) {
 		log.debug("delete");
+		log.debug(SQL_DELETE);
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -102,6 +105,8 @@ public enum PostDao {
 	
 	public Post select(int id) {
 		log.debug("select(id={})",id);
+		log.debug(SQL_SELECT_BY_ID);
+		
 		Post post = null;
 		Connection conn= null;
 		PreparedStatement stmt = null;
