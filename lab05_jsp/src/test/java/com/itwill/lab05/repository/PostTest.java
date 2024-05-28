@@ -64,6 +64,9 @@ public class PostTest {
 		Post post = dao.select(1); //id=1(PK)가 테이블에 있는 경우
 		Assertions.assertNotNull(post);
 		log.debug(post.toString());
+		
+		post = dao.select(0);
+		Assertions.assertNull(post);
 	}
 	
 
