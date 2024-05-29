@@ -54,7 +54,7 @@ public enum PostDao {
 	private static final String SQL_INSERT = "insert into posts (title, content, author) values (?, ?, ?)";
 	
 	public int insert(Post post) {
-		log.debug("insert");
+		log.debug("insert ; post = {}", post);
 		log.debug(SQL_INSERT);
 		int result = 0;
 		Connection conn = null;

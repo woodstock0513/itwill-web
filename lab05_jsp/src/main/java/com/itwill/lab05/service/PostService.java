@@ -20,7 +20,32 @@ public enum PostService {
 	private final PostDao postDao = PostDao.INSTANCE;
 	
 	public List<Post> read(){
-		return postDao.select();
+		log.debug("read");
+		
+		List<Post> list = postDao.select();
+		log.debug("list size = {}",list.size());
+		
+		return list;
+	}
+	
+	public int create(Post post) {
+		log.debug("create ; Post={}",post);
+		
+		//repository 계층의 메서드를 사용해서 DB 테이블에 행을 삽입
+		int result = postDao.insert(post);
+		log.debug("insert result ={}", result);
+		
+		return result;
+	}
+	
+	public Post read(int id) {
+		log.debug("read() ; id={}",id);
+		
+		//영속성 계층의 메서드를 호출해서 DB 테이블에서 id로 검색하는 sql 실행
+		Post post = postDao.select(id);
+		log.debug("{}",post);
+		
+		return post; //컨트롤러에게 검색한 Post 객체 리턴
 	}
 	
 }
