@@ -54,4 +54,11 @@ public enum PostService {
 		log.debug("delete result = {}",result);
 		return result;
 	}
+	
+	public int update(Post post) {
+		log.debug("update({})",post);
+		int result = postDao.update(post);
+		log.debug("update result = {}",result);
+		return result;
+	}
 }

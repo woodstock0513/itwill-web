@@ -127,6 +127,30 @@ public enum PostDao {
 		return post;
 	}
 	
+	private static final String SQL_UPDATE = "update posts set title = ?, content = ?, modified_time = systimestamp where id = ?";
+	
+	public int update(Post post) {
+		log.debug("update; post {}", post);
+		log.debug(SQL_UPDATE);
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_UPDATE);
+			stmt.setString(1, post.getTitle());
+			stmt.setString(2, post.getContent());
+			stmt.setInt(3, post.getId());
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+		return result;
+	}
 	
 	private Post fromResultSetToPost(ResultSet rs) throws SQLException {
 		int id = rs.getInt("id");
