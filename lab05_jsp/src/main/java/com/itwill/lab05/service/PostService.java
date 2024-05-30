@@ -48,4 +48,10 @@ public enum PostService {
 		return post; //컨트롤러에게 검색한 Post 객체 리턴
 	}
 	
+	public int delete(int id) {
+		log.debug("delete(id={})",id);
+		int result = postDao.delete(id);
+		log.debug("delete result = {}",result);
+		return result;
+	}
 }
