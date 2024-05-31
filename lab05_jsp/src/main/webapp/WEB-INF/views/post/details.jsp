@@ -49,12 +49,16 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-footer">
-                    <c:url var="postModifyPage" value="/post/modify">
-                        <c:param name="id" value="${post.id}"/>
-                    </c:url>    
-                    <a class="btn btn-outline-primary" href="${postModifyPage}">수정하기</a>
-                </div>
+                <%-- 글 작성자 아이디와 로그인 사용자 아이디가 같으면 수정하기 버튼을 보여줌 --%>
+                <c:if test="${signedInUser eq post.author}">
+                    <div class="card-footer">
+                        <c:url var="postModifyPage" value="/post/modify">
+                            <c:param name="id" value="${post.id}" />
+                        </c:url>
+                        <a class="btn btn-outline-primary"
+                            href="${postModifyPage}">수정하기</a>
+                    </div>
+                </c:if>
             </div>
             
         </main>    

@@ -73,7 +73,7 @@ public enum UserDao {
 		} finally {
 			closeResources(conn, stmt, rs);
 		}
-		return user;
+		return result;
 	}
 	
 	

@@ -33,8 +33,8 @@
                             <textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요" required="required"></textarea>
                         </div>
                         
-                        <div class="mt-2">
-                            <input class="form-control" type="text" name="author" placeholder="작성자를 입력하세요" required="required"/>
+                        <div class="mt-2 d-none">
+                            <input class="form-control" type="text" name="author" value="${signedInUser}"/>
                         </div>
                         
                         <div class="mt-2">
