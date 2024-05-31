@@ -29,7 +29,26 @@
                 <div class="card-body">
                     <c:url var="signInPage" value="/user/signup" />
                     <form action="${signInPage}" method="post">
-                        
+                    
+                        <div class="mt-2">
+                            <label for="userid" class="form-label">아이디</label>
+                            <input type="text" id="userid" class="form-control" 
+                                name="userid" required autofocus />
+                        </div>
+                        <div class="mt-2">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" id="password" class="form-control" 
+                                name="password" required />
+                        </div>
+                        <div class="mt-2">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" id="email" class="form-control" 
+                                name="email" required />
+                        </div>
+                        <div class="mt-2">
+                            <input type="submit" class="form-control btn btn-outline-success" 
+                                value="작성완료" />
+                        <%--
                         <div class="mt-2">
                             <input class="form-control" type="text" name="userid" placeholder="아이디을 입력하세요" required autofocus />
                         </div>
@@ -45,7 +64,7 @@
                         <div class="mt-2">
                             <input class="form-control btn btn-outline-success" type="submit" value="회원가입"/>
                         </div>
-                        
+                         --%>
                     </form>
                 </div>
             </div>    
