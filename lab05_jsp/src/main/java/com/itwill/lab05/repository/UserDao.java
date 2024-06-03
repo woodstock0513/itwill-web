@@ -76,6 +76,29 @@ public enum UserDao {
 		return result;
 	}
 	
+	// TODO: sql 문자열, 메서드 추가 (users points 컬럼 업데이트)
+	private static final String SQL_UPDATE_POINTS = "update users set points = points + ? where userid = ?";
+	
+	public int updatePoints(int point, String userId) { //userid가 pk는 아니지만 unique 하니까~
+		log.debug("updatePoints userid:{}, points:{}",userId, point);
+		log.debug(SQL_UPDATE_POINTS);
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SQL_UPDATE_POINTS);
+			stmt.setInt(1, point);
+			stmt.setString(2, userId);
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources(conn, stmt);
+		}
+		return result;
+	}
+	
 	
 	
 	private User fromResultSetToUser(ResultSet rs) throws SQLException {
