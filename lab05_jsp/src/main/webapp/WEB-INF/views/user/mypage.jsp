@@ -11,38 +11,45 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+
     <div class="container-fluid">
         <main>
-        <c:set var="pageTitle" value="로그인" scope="page"/>
+        <c:set var="pageTitle" value="마이페이지" scope="page"/>
         <%@ include file="../fragments/header.jspf" %>
             <div class="card mt-2">
                 <div class="card-header">
-                    <h2>로그인</h2>
+                    <h2>${signedInUser}님의 정보 확인하기</h2>
                 </div> 
+                
                 <div class="card-body">
-                    <c:if test="${not empty param.result && param.result eq 'f'}">
-                        <div class="text-danger">아이디와 패스워드를 확인하세요</div>
-                    </c:if>
-                    <c:url var="signInPage" value="/user/signin"></c:url>
-                    <form method="post" action="${signInPage}">
-                        <div class="mt-2">
-                            <input type="text" name="userid" required autofocus placeholder="id를 입력하세요" class="form-control"/>
-                        </div>
-                        <div class="mt-2">
-                            <input type="password" name="password" required placeholder="password를 입력하세요" class="form-control"/>
+                    <c:url var="myPage" value="/user/mypage"></c:url>
+                    <form method="post" action="${myPage}">
+                        
+                        <div>
+                            <a>내 포인트 : <span>${user.points}</span></a>
                         </div>
                         <div>
-                            <input name="target" value="${param.target}" readonly class="d-none" />
+                            <a>내 이메일 : <span>${user.email}</span></a>
                         </div>
                         <div class="mt-2">
-                            <input type="submit" value="로그인" class="form-control btn btn-outline-success"/>
+                            <input type="password" name="password2" required autofocus placeholder="현재 비밀번호를 입력하세요" class="form-control"/>
+                        </div>
+                        <div class="mt-2">
+                            <input type="password" name="changePassword" required placeholder="변경할 비밀번호를 입력하세요" class="form-control"/>
+                        </div>
+                        <div class="mt-2">
+                            <input type="password" name="changePassword2" required placeholder="변경할 비밀번호를 다시 입력하세요" class="form-control"/>
+                        </div>
+                        <div class="mt-2">
+                            <input type="submit" value="비밀번호 변경" class="form-control btn btn-outline-success"/>
                         </div>
                     </form>
-                </div>           
+                </div>        
             </div>
         
         </main>
     </div>
+         
          
          
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 

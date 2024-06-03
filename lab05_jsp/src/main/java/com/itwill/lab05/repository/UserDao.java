@@ -99,7 +99,33 @@ public enum UserDao {
 		return result;
 	}
 	
-	
+	//userid로 user 찾는 메서드
+		private static final String SQL_SELECT_BY_USERID = "select * from users where userid = ?";
+		
+		public User selectByUserId(String userid) {
+			log.debug("selectByUserId ; {}", userid);
+			log.debug(SQL_SELECT_BY_USERID);
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			User user = null;
+			try {
+				conn = ds.getConnection();
+				stmt = conn.prepareStatement(SQL_SELECT_BY_USERID);
+				stmt.setString(1, userid);
+				rs = stmt.executeQuery();
+				if(rs.next()) {
+					user = fromResultSetToUser(rs);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeResources(conn, stmt, rs);
+			}
+			return user;
+		}
+		
+		
 	
 	private User fromResultSetToUser(ResultSet rs) throws SQLException {
 		int id = rs.getInt("id");

@@ -30,4 +30,13 @@ public enum UserService {
 		
 		return user;
 	}
+	
+	//세션아이디로 
+	public User findInfo(String userid) {
+		log.debug("find info ; userid = {}",userid);
+		User user = userDao.selectByUserId(userid);
+		return user;
+	}
+	
+	
 }
