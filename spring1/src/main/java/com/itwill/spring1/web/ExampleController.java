@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.itwill.spring1.dto.UserDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,5 +43,60 @@ public class ExampleController {
 		// sevlet-context.xml 설정에서 접두사/접미사 설정을 했기 때문에 저 경로를 찾을 수 있는 것
 	}
 	
+	@GetMapping("/example")
+	public void controllerExample() {
+		log.debug("controllerExample()");
+		//컨트롤러 메서드가 리턴값이 없는 경우
+		// 요청 주소가 view의 이름이 됨!!
+	}
+	
+	@GetMapping("/ex1")
+	public void example1(@RequestParam(name = "username") String username,
+						@RequestParam(name = "age", defaultValue = "0") int age,
+						Model model) {
+		log.info("example1(username={},age={})",username, age);
+		// 컨트롤러 메서드 파라미터를 선언할 때 @RequestParam 애너테이션을 사용하면
+		//디스패쳐 서블릿이 컨트롤러 메서드를 호출할 때, 
+		// (1) request.getParameter("username"), request.getParameter("age")를 호출해서 요청 파라미터 값들을 읽고
+		// (2) 컨트롤러 메서드의 아규먼트로 전달해줌
+		
+		//요청파라미터 값들로 UserDto 객체를 생성
+		UserDto user= UserDto.builder().username(username).age(age).build();
+		
+		// UserDto 객체를 뷰로 전달 -> 모델 이용
+		model.addAttribute("user", user);
+	}
+	
+	@PostMapping("/ex2")
+	public String ex2(@RequestParam(name = "user") UserDto dto) {
+		log.debug("ex2(dto={})", dto);
+		//-> @ModelAttribute(name="user") UserDto user 파라미터 선언은
+		// model.addAttribute("user", dto); 코드 작성과 같은 효과
+		// 컨트롤러에서 뷰로 전달하는 데이터
+		
+		return "ex1"; //-> view 이름
+	}
+	
+	
+	@GetMapping("/test")
+	public void test() {
+		log.debug("test");
+	}
+	
+	@GetMapping("/test2")
+	public String forward() {
+		log.debug("forward");
+		
+		return "forward:/test"; //접두사
+		//컨트롤러 메서드가 foward:로 시작하는 문자열을 리턴
+		//
+	}
+	
+	@GetMapping("/test3")
+	public String redirect() {
+		log.debug("redirect");
+		
+		return "redirect:/test";
+	}
 	
 }
