@@ -16,7 +16,7 @@
         <h2>${now}</h2>
         <!-- <img alt="cat" src="/spring1/images/cat.jpg"> -->
         <!-- <img alt="cat" src="./images/cat.jpg"> -->
-        <c:url var="cat" value="/images/cat.jpg"/>
+        <c:url var="cat" value="/images/ee.png"/>
         <img alt="cat" src="${cat }"/>
         <!-- <img alt="cat" src="http://localhost:8080/spring1/images/cat.jpg"/> --> 
     </header>   
@@ -40,6 +40,22 @@
                 <li>
                     <c:url var="redirectPage" value="/test3"/>
                     <a href="${redirectPage}">리다이렉트</a>
+                </li>
+                <li>
+                    <c:url var="rest1" value="/rest1"/>
+                    <a href="${rest1}">REST Controller 1</a>
+                </li>
+                <li>
+                    <c:url var="rest2" value="/rest2"/>
+                    <a href="${rest2}">REST Controller 2</a>
+                </li>
+                <li>
+                    <c:url var="rest3" value="/rest3"/>
+                    <a href="${rest3}">REST Controller 3</a>
+                </li>
+                <li>
+                    <c:url var="rest4" value="/rest4"/>
+                    <a href="${rest4}">REST Controller 4</a>
                 </li>
             </ul>
         </nav>
