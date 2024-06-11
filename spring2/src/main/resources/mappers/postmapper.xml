@@ -4,8 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwill.spring2.repository.PostDao"> 
+    <!-- posts 테이블 전체 검색. 목록 보기 -->
     <select id="selectOrderByIdDesc" resultType="Post">  <!-- alias="Post"라고 해둬서 / 너무 길어서 config에 미리 써두는거 -->
         select * from posts order by id desc
     </select> <!-- SQL 문장 종류에 따라 태그 바꾸면 됨 -->
     
+    <!-- posts 테이블에서 id(pk)로 검색 -->
+    <select id="selectById" resultType="Post">
+        select * from posts where id = #{id}  <!-- prepared stmtm에서 ? 였던 부분 -->
+    </select>
+    
+    <!-- posts 테이블에 행 삽입하기. 새 글 작성 -->
+    <insert id="insertPost">
+        insert into posts (title, content, author) values (#{title}, #{content}, #{author})
+    </insert>
+    
+    <!--  posts 테이블에 해당 id의 제목과 내용, 수정시간 업데이트 -->
+    <update id="updatePost">
+        update posts set title = #{title}, content = #{content}, modified_time= systimestamp where id = #{id}
+    </update>
+    
+    <!-- posts 테이블에서 해당 id의 행을 삭제 -->
+    <delete id="deletePost">
+        delete from posts where id = #{id}
+    </delete>
 </mapper>
