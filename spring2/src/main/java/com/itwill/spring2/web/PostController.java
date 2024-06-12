@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.spring2.dto.PostCreateDto;
 import com.itwill.spring2.dto.PostListDto;
+import com.itwill.spring2.dto.PostSearchDto;
+import com.itwill.spring2.dto.PostUpdateDto;
 import com.itwill.spring2.repository.Post;
 import com.itwill.spring2.service.PostService;
 
@@ -97,9 +99,34 @@ public class PostController {
     
     
     
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") int id) {
+    	log.debug("delete(id={})",id);
+    	
+    	//컨트롤러는 서비스 컴포넌트의 메서드를 호출해서 db의 테이블에서 해당 아디의 글을 삭제
+    	postService.delete(id);
+    	
+    	//post 목록 페이지로 리다이렉트
+    	return "redirect:/post/list";
+    
+    }
+    
+    @GetMapping("/update")
+    public void update() {
+    	log.debug("update()");
+    }
     
     
+    @PostMapping("/update")
+    public String update(PostUpdateDto dto) {
+    	log.debug("update()");
+    	postService.update(dto);
+    	
+//    	return "redirect:/post/list";
+    	return "redirect:/post/details?id="+Integer.toString(dto.getId());
+    }
     
+
     
 
 }
