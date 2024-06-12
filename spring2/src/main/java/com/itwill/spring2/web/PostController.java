@@ -126,7 +126,16 @@ public class PostController {
     	return "redirect:/post/details?id="+Integer.toString(dto.getId());
     }
     
-
+    @GetMapping("/search")
+    public String search(PostSearchDto dto, Model model) {
+    	log.debug("search(dto = {})",dto);
+    	
+    	List<PostListDto> list = postService.search(dto);
+    	model.addAttribute("posts",list);
+    	
+    	return "/post/list";
+    }
+    
     
 
 }

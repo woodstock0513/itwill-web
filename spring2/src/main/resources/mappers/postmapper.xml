@@ -28,4 +28,29 @@
     <delete id="deletePost">
         delete from posts where id = #{id}
     </delete>
+    
+    <!-- posts 테이블에서 제목/내용/작성자로 검색 -->
+    <select id="search" resultType="Post">
+        <bind name="searchKeyWord" value="'%' + keyword + '%'"/>
+        select * from posts 
+        <where>
+            <choose>
+                <when test='category.equals("t")'>
+                    upper(title) like upper(#{searchKeyWord})
+                </when>
+                <when test='category.equals("c")'>
+                    upper(content) like upper(#{searchKeyWord})
+                </when>
+                <when test='category.equals("tc")'>
+                    upper(title) like upper(#{searchKeyWord}) or upper(content) like upper(#{searchKeyWord})
+                </when>
+                <when test='category.equals("a")'>
+                    upper(author) like upper(#{searchKeyWord})
+                </when>
+            </choose>
+        </where>
+        order by id desc
+    </select>
+    
+    
 </mapper>

@@ -78,7 +78,15 @@ public class PostService {
 		return result;
 	}
 	
-
+	public List<PostListDto> search(PostSearchDto dto) {
+		log.debug("search()");
+		
+		List<Post> list =  postDao.search(dto);
+		
+		return list.stream().map(PostListDto::fromEntity).toList();
+		
+		
+	}
 	
 	
 	
