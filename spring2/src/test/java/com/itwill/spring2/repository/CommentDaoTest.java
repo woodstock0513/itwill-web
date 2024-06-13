@@ -23,7 +23,7 @@ public class CommentDaoTest {
 	//final 쓰면 안되는 이유 : 단위 테스트는 기본 생성자만 부를 수 잇음..
 	
 	
-	@Test
+//	@Test
 	public void select() {
 		Assertions.assertNotNull(dao); //주입받앗는지 확인
 		List<Comment> list = dao.selectByPostId(62);
@@ -34,10 +34,30 @@ public class CommentDaoTest {
 	
 //	@Test
 	public void insert() {
-		Comment comment = Comment.builder().username("admin").ctext("insert JUnitTest").postId(62).build();
+		Comment comment = Comment.builder().username("guest").ctext("test22222").postId(5).build();
 		int result = dao.insert(comment);
 		Assertions.assertEquals(1, result);
 		log.debug(comment.toString());
+	}
+	
+//	@Test
+	public void update() {
+		Comment comment = Comment.builder().id(2).ctext("수정해보기").build();
+		int result = dao.update(comment);
+		Assertions.assertEquals(1, result);
+		
+	}
+	
+//	@Test
+	public void deleteById() {
+		int result = dao.deleteById(3);
+		Assertions.assertEquals(1, result);
+	}
+	
+	@Test
+	public void deleteByPostId() {
+		int result = dao.deleteByPostId(5);
+		Assertions.assertEquals(0, result);
 	}
 	
 	
