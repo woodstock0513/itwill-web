@@ -54,12 +54,32 @@ public class CommentDaoTest {
 		Assertions.assertEquals(1, result);
 	}
 	
-	@Test
+//	@Test
 	public void deleteByPostId() {
 		int result = dao.deleteByPostId(5);
 		Assertions.assertEquals(0, result);
 	}
 	
+	
+	
+//	@Test
+	public void selectCommentCount() {
+		int result = dao.selectCommentCount(62);
+		Assertions.assertEquals(2, result);
+	}
+	
+	@Test
+	public void selectById() {
+		//테이블에 아이디가 있는 경우
+		Comment comment1 = dao.selectById(4);
+		Assertions.assertNotNull(comment1);
+		log.debug(comment1.toString());
+		
+		//테이블에 아이디가 없는 경우
+		Comment comment2 = dao.selectById(7);
+		Assertions.assertNull(comment2);
+		
+	}
 	
 	
 	
