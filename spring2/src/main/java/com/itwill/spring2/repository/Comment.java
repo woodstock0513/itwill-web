@@ -1,5 +1,6 @@
 package com.itwill.spring2.repository;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +16,8 @@ public class Comment {
 	private String username; // 댓글 작성자 아이디
 	private String ctext; // 댓글 내용
 	private LocalDateTime createdTime; // 댓글 최초 작성 시간
-	private LocalDateTime modifiedTime; // 댓글 최종 수정 시간
+//	private LocalDateTime modifiedTime; // 댓글 최종 수정 시간
+	private Timestamp modifiedTime;
 	
 	
 	
