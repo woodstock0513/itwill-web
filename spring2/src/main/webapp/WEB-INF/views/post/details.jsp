@@ -92,9 +92,7 @@
                         </div>
                     </div>
                     <!-- 댓글 목록 -->
-                    <div class="mt-2" id="comments">
-                    댓글목록
-                    </div>
+                    <div class="mt-2" id="comments"></div>
                     
                 </div>
                 
@@ -104,9 +102,14 @@
         
     </div>
     
+    
+    <!--BootStrap의 JS 라이브러리 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
+    <!-- AXio의 JS 라이브러리 -->    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--나의 JS 라이브러리 -->    
     <c:url var="commentsJS" value="/js/comments.js" />
     <script src="${commentsJS}"></script>
 </body>
