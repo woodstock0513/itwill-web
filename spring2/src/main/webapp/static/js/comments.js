@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded',() => {
     // btnToggleComment 버튼 요소 찾기
     const btnToggleComment = document.querySelector('button#btnToggleComment');
                  // ajax : $('button#btnToggleComment)
+                 
     // collapseComments div 요소를 부트스트랩의 Collapse 객체로 생성.
     const bsCollapse = new bootstrap.Collapse('div#collapseComments',{toggle:false}); //접혀있는상태
+    
     // 댓글 토글 버튼에 클릭 이벤트 리스너 등록
     btnToggleComment.addEventListener('click', () => {
         bsCollapse.toggle();
@@ -27,6 +29,17 @@ document.addEventListener('DOMContentLoaded',() => {
     // 버튼에 클릭 이벤트 리스너 등록
     btnRegisterComment.addEventListener('click',registerComment);
     
+    //부트스트랩 모달 객체 생성
+    const commentModal = new bootstrap.Modal('div#commentModal', {backdrop:true});
+    
+    //모달의 저장 버튼을 찾고 클릭 이벤트 리스너 설정
+    const btnUpdateComment = document.querySelector('button#btnUpdateComment');
+    
+    btnUpdateComment.addEventListener('click',updateComment);
+    
+    
+    /*---------- 위는 실제 작동 순서, 밑은 함수 정의----------*/
+    
     // 댓글 등록 이벤트 리스너 콜백(함수). 선언은 어디서 해도 상관업음 (펑션으로 할 때)
     function registerComment(){
         //댓글이 달릴 포스트 번호 찾기
@@ -44,7 +57,7 @@ document.addEventListener('DOMContentLoaded',() => {
             return; //이벤트 리스너 종료
         }
         
-        //ajax 요청에서 보낼 데이터 객체를 생성
+        //ajax 요청에서 보낼 데이터 객체를 생성 
         /* 근데 보기 불편..
         const data = {
             postId: postId,
@@ -135,7 +148,11 @@ document.addEventListener('DOMContentLoaded',() => {
             btn.addEventListener('click',deleteComment);
         }
         
-        //TODO :모든 수정 버튼을 찾아서 클릭 이벤트 리스너 설정
+        //모든 수정 버튼을 찾아서 클릭 이벤트 리스너 설정
+        const btnModifies = document.querySelectorAll('button.btnModifyComment');
+        for (let btn of btnModifies){
+            btn.addEventListener('click',showCommentModal);
+        }
         
     }
     
@@ -167,7 +184,63 @@ document.addEventListener('DOMContentLoaded',() => {
         .catch((error)=>{
             console.log(error);
         });
+    }
+    
+    function showCommentModal(event){
+        
+        //이벤트 타겟(수정버튼)의 data-id 속성값을 읽음
+        const id = event.target.getAttribute('data-id');
+        
+        //ajax 요청 보내기 (id로 댓글 검색)
+        const uri = `../api/comment/${id}`;
+        
+        axios
+        .get(uri)
+        .then((response) => {
+            console.log(response.data); //ajax는 항상 resp가 data속성을 가짐
+            //const commentId = response.data.id; //response의 data(create000dto/id,ctext,mTime,username이 있는 객체)의 id
+            
+            //모달의 input(댓글번호), textarea(댓글 내용)를 채우기
+            document.querySelector('input#modalCommentId').value = id;
+            document.querySelector('textarea#modalCommentText').value = response.data.ctext;            
+        })
+        .catch((error) => console.log(error));
+        
+        commentModal.show();
+    }
+    
+    function updateComment(){
+        //업데이트할 댓글 번호
+        const id = document.querySelector('input#modalCommentId').value;
+        
+        //업데이트할 댓글 내용
+        const ctext = document.querySelector('textarea#modalCommentText').value;
+        
+        if (ctext === ""){
+            alert('수정할 내용을 입력하세요');
+            return; //이벤트 리스너 종료
+        }
+        
+        //댓글 업데이트 요청 REST APT URI
+        const uri = `../api/comment/${id}`;
+        
+        //ajax 요청
+        axios  // {id, ctext}로 했으면 restController에서 setId를 할 필요가 없음!!
+        .put(uri, {ctext}) //{ctext} = {ctext:ctext}. 객체의 프로퍼티 이름 : 그 안에 넣어줄 값(지역변수) 
+        .then((response)=>{
+            console.log(response);
+            
+            //댓글 목록 갱신
+            getAllComments();
+            
+            //모달 감추기(숨김)
+            commentModal.hide(); 
+        })
+        .catch((error)=>console.log(error));
         
     }
+    
+    
+    
     
 });

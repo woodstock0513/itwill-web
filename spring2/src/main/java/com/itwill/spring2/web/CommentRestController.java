@@ -76,8 +76,9 @@ public class CommentRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Integer> updateComment(@RequestBody CommentUpdateDto dto){
-		//dto.setId(id); // 이거 안하면 바디 작성할 때 id 넣어주면 됨. 이거 할거면 @PathVariable int id 아규먼트 있어야! - 나중에 js로 할 수 잇어짐
+	public ResponseEntity<Integer> updateComment(@PathVariable int id, @RequestBody CommentUpdateDto dto){
+		// ajax 이용하기 위해,, 활성화 시켜줌
+		dto.setId(id); // 이거 안하면 바디 작성할 때 id 넣어주면 됨. 이거 할거면 @PathVariable int id 아규먼트 있어야! - 나중에 js로 할 수 잇어짐
 		log.debug("updateComment {}",dto);
 		int result = commentService.update(dto);
 		
