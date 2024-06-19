@@ -24,32 +24,34 @@
                     </div>
                     <!-- userid 중복 체크 결과 표시할 영역 -->
                     <div id="checkUseridResult"></div>
-                    
-                    
                     <div class="my-2">
                         <input type="password" class="form-control" id="password"
                             name="password" required placeholder="비밀번호"/>
                     </div>
-                    
                     <div class="my-2">
                         <input type="email" class="form-control" id="email"
                             name="email" required placeholder="이메일"/>
                     </div>
-                    
                     <div class="my-2">
                         <button id="btnSignup" class="form-control btn btn-outline-success disabled">작성완료</button>
                     </div>
-                    
                     
                 </form>
             </div>
             
         </main>
         
-        
     </div>
          
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    
+    <!-- Axio JS 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- 우리가 만드는 JS 파일 -->
+    <c:url var="userSignUpJS" value="/js/user_signup.js" />
+    <script src="${userSignUpJS}"></script>
 </body>
 </html>
