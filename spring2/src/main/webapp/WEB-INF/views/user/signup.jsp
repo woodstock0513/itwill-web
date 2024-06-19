@@ -33,7 +33,7 @@
                             name="email" required placeholder="이메일"/>
                     </div>
                     <div class="my-2">
-                        <button id="btnSignup" class="form-control btn btn-outline-success disabled">작성완료</button>
+                        <button id="btnSignUp" class="form-control btn btn-outline-success disabled">작성완료</button>
                     </div>
                     
                 </form>
