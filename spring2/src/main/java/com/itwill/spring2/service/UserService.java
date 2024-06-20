@@ -2,6 +2,7 @@ package com.itwill.spring2.service;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.spring2.dto.UserCreateDto;
 import com.itwill.spring2.repository.User;
 import com.itwill.spring2.repository.UserDao;
 
@@ -28,6 +29,13 @@ public class UserService {
 		
 	}
 	
+	//회원가입 서비스
+	public int create(UserCreateDto dto) {
+		log.debug("create({})",dto);
+		
+		int result = userDao.insert(dto.toEntity());
+		return result;
+	}
 	
 	
 	
