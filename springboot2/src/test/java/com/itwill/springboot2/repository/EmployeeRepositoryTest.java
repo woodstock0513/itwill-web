@@ -1,0 +1,54 @@
+package com.itwill.springboot2.repository;
+
+//import static 구문: static 메세드, 필드 이름을 import
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.List;
+import java.util.Optional;
+
+//import org.junit.jupiter.api.Assertions; 기존 방식
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.itwill.springboot2.domain.Employee;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@SpringBootTest
+public class EmployeeRepositoryTest {
+	@Autowired //의존성 주입 (DI), 제어의 역전(IoC, Inversion of Control)
+	private EmployeeRepository empRepo;
+	
+	//@Test
+	public void test() {
+		///Assertions.assertNotNull(empRepo); //기존에 쓰던 방식
+		assertThat(empRepo).isNotNull(); //새로운 방식
+		//empRepo 객체가 null이 아니면 테스트 성공
+		log.info("empRepo = {}",empRepo);
+	}
+	
+	//select * from emp
+	//@Test
+	public void findAllTest() {
+		List<Employee> list = empRepo.findAll();
+		assertThat(list.size()).isEqualTo(14);
+		for (Employee e : list) {
+			System.out.println(e); //table 값들이 나옴
+		}
+	}
+	
+	//TODO : 사번으로 검색하는 메서드를 찾아서 단위 테스트 코드 작성
+	//@Test
+	public void findByEmpnoTest() {
+		Optional<Employee> emp = empRepo.findById(7499);
+		assertThat(emp).isNotNull();
+		log.info("emp = {}",emp);
+	}
+	
+	
+	//TODO: dept 테이블과 매칭되는 엔티티 클래스를 설정, 레포지토리 인터페이스 작성
+	// 단위 테스트 클래스 작성
+}
