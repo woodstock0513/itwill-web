@@ -42,7 +42,7 @@ public class EmployeeRepositoryTest {
 	}
 	
 	//TODO : 사번으로 검색하는 메서드를 찾아서 단위 테스트 코드 작성
-	@Test
+	//@Test
 	@Transactional
 	public void findByEmpnoTest() {
 		Optional<Employee> emp = empRepo.findById(7499);
@@ -61,8 +61,17 @@ public class EmployeeRepositoryTest {
 		assertThat(none).isNull();
 	}
 	
-	
-	
-	//TODO: dept 테이블과 매칭되는 엔티티 클래스를 설정, 레포지토리 인터페이스 작성
-	// 단위 테스트 클래스 작성
+	@Transactional
+	@Test
+	public void findMannagerTest() {
+		//사번이 7369인 직원 정보 검색
+		//Optional<Employee> emp = empRepo.findById(7369);
+		Employee emp = empRepo.findById(7369).orElseThrow();
+		assertThat(emp.getId()).isEqualTo(7369);
+		log.info("emp = {}",emp);
+		
+		Employee mgr = emp.getManager();
+		assertThat(mgr.getId()).isEqualTo(7902);
+		log.info("mgr = {}",mgr);
+	}
 }
