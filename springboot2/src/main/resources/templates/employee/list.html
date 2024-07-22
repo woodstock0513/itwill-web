@@ -34,7 +34,7 @@
                         <td th:text="*{hiredate}"></td>
                         <td th:text="*{salary}"></td>
                         <td th:text="*{commission}"></td>
-                        <td th:text="*{department.departmentname}"></td>
+                        <td><a th:text="*{department.departmentname}" th:href="@{/department/detail(deptId=*{department.id})}"></a></td>
                     </tr>
                 </tbody>
             </table>
