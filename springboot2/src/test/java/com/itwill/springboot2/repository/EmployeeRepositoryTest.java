@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot2.domain.Employee;
 
@@ -42,6 +43,7 @@ public class EmployeeRepositoryTest {
 	
 	//TODO : 사번으로 검색하는 메서드를 찾아서 단위 테스트 코드 작성
 	@Test
+	@Transactional
 	public void findByEmpnoTest() {
 		Optional<Employee> emp = empRepo.findById(7499);
 		//assertThat(emp).isNotNull();
@@ -50,6 +52,7 @@ public class EmployeeRepositoryTest {
 		assertThat(allen).isNotNull();
 		assertThat(allen.getEname()).isEqualTo("ALLEN");
 		log.info("allen = {}",allen);
+		log.info("dept = {}",allen.getDepartment());
 
 		//사번이 테이블에 없는 경우
 		Optional<Employee> emp2 = empRepo.findById(1000);
