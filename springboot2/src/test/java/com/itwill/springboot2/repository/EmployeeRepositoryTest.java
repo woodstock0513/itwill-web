@@ -41,12 +41,23 @@ public class EmployeeRepositoryTest {
 	}
 	
 	//TODO : 사번으로 검색하는 메서드를 찾아서 단위 테스트 코드 작성
-	//@Test
+	@Test
 	public void findByEmpnoTest() {
 		Optional<Employee> emp = empRepo.findById(7499);
-		assertThat(emp).isNotNull();
-		log.info("emp = {}",emp);
+		//assertThat(emp).isNotNull();
+		//Employee allen =  emp.get(); //emp가 null이면 get 호출시 예외 발생
+		Employee allen = emp.orElseGet(()->null);
+		assertThat(allen).isNotNull();
+		assertThat(allen.getEname()).isEqualTo("ALLEN");
+		log.info("allen = {}",allen);
+
+		//사번이 테이블에 없는 경우
+		Optional<Employee> emp2 = empRepo.findById(1000);
+		Employee none = emp2.orElseGet(()->null);
+		// orElseGet: 값이 있으면 리턴, 그렇지 않으면 메서드 실행 후 결과값 리턴. 
+		assertThat(none).isNull();
 	}
+	
 	
 	
 	//TODO: dept 테이블과 매칭되는 엔티티 클래스를 설정, 레포지토리 인터페이스 작성
