@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.springboot3.domain.Employee;
+import com.itwill.springboot3.domain.Job;
 import com.itwill.springboot3.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,14 @@ public class EmployeeController {
 		model.addAttribute("emp", emp);
 		return "employee/details";
 		
+	}
+	
+	@GetMapping("/job/list")
+	public String jobList(Model model) {
+		log.info("jobList()");
+		List<Job> list = empSvc.readJob();
+		model.addAttribute("jobs", list);
+		return "job/list";
 	}
 	
 }
