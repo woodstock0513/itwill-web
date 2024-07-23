@@ -30,7 +30,7 @@ public class Department {
 	private Location location; 
 	
 	@ToString.Exclude
-	@OneToOne(fetch = FetchType.LAZY) //lazy 오류나서 eager로 바꿈
+	@OneToOne(fetch = FetchType.LAZY) //lazy 오류나서 eager로 바꿈 - 해결
 	@JoinColumn(name = "manager_id")
 	private Employee manager;
 	
