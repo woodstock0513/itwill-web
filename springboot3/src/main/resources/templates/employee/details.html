@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Spring Boot 2</title>
+    </head>
+    <body>
+        <div th:replace="~{/layout/fragments :: pageHeader('직원 상세 페이지')}"></div>
+        
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>사번</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>전화번호</th>
+                        <th>고용일</th>
+                        <th>직무</th>
+                        <th>급여</th>
+                        <th>수당비율</th>
+                        <th>매니저</th>
+                        <th>부서</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:object="${emp}">
+                        <td th:text="*{id}"></td>
+                        <td><a th:text="|*{firstName} *{lastName}|" th:href="@{/employee/details/{id}(id=*{id})}"></a></td>
+                        <td th:text="|*{email}@naver.com|" ></td>
+                        <td th:text="*{phoneNumber}" ></td>
+                        <td th:text="*{hireDate}"></td>
+                        <td th:text="*{job.jobTitle}"></td>
+                        <td th:text="*{salary}"></td>
+                        <td th:text="*{commissionPct}"></td>
+                        <td>
+                            <th:block th:if="*{manager != null}">
+                                <a th:text="*{manager.firstName}" th:href="@{/employee/details/{id}(id=*{manager.id})}"></a>
+                            </th:block>
+                        </td>
+                        <td>
+                            <th:block th:if="*{department != null}">
+                                <a th:text="*{department.departmentName}" th:href="@{/department/details/{id}(id=*{department.id})}"></a>
+                            </th:block>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </body>
+</html>
