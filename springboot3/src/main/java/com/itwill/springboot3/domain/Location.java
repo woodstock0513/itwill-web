@@ -6,32 +6,33 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
-@Table(name = "departments")
-@Getter @ToString @EqualsAndHashCode @NoArgsConstructor
-public class Department {
+@NoArgsConstructor @Getter @ToString @EqualsAndHashCode
+@Entity @Table(name = "locations")
+public class Location {
 	
-	@Id @Column(name = "department_id")
+	@Id @Column(name = "location_id")
 	private Integer id;
+
+	private String city;
 	
-	private String departmentName;
-	
-//	private Integer locationId;
 	@ToString.Exclude
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "location_id")
-	private Location location; 
+	@JoinColumn(name = "country_id")
+	private Country country;
+//	private Character countryId;
 	
-	@ToString.Exclude
-	@OneToOne(fetch = FetchType.LAZY) //lazy 오류나서 eager로 바꿈
-	@JoinColumn(name = "manager_id")
-	private Employee manager;
+	private String postalCode;
+	
+	@Column(name = "STATE_PROVINCE")
+	private String state;
+	
+	@Column(name = "STREET_ADDRESS")
+	private String street;
 	
 }
