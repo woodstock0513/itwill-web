@@ -35,4 +35,23 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	//select * from employees where upper(first_name) = upper(?) order by first_name desc
 	List<Employee> findByFirstNameContainingIgnoreCaseOrderByFirstNameDesc(String keyword);	
 	
+	//급여가 어떤 값을 초과하는 직원들의 정보
+	//select * from employees where salary > ?
+	List<Employee> findBySalaryGreaterThan(Integer salary);
+	
+	//급여가 어떤 값 미만인 직원들의 정보(where salary < ?)
+	List<Employee> findBySalaryLessThan(Integer salary);
+	
+	//급여가 어떤 범위 안에 있는 직원들의 정보 (where salary between ?1 and ?2)
+	List<Employee> findBySalaryBetween(Integer minSalary, Integer maxSalary);
+	
+	//입사날짜가 특정 날짜 이전인 직원들의 정보 (where hiredate < ?)
+	List<Employee> findByHireDateBefore(LocalDate date);
+	
+	//입사날짜가 특정 날짜 이후인 직원들의 정보 (where hiredate > ?)
+	List<Employee> findByHireDateAfter(LocalDate date);
+	
+	//입사날짜가 날짜 범위 안에 있는 직원들의 정보 (where hiredate between ?1 and ?2)
+	List<Employee> findByHireDateBetween(LocalDate date1,LocalDate date2);
+	
 }
