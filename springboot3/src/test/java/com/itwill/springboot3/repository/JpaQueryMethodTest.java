@@ -27,12 +27,20 @@ public class JpaQueryMethodTest {
 //		list = empRepo.findByFirstNameLike("%ev%");
 //		list=empRepo.findByFirstNameContainingIgnoreCase("eV");
 //		list=empRepo.findByFirstNameContainingIgnoreCaseOrderByFirstNameDesc("Ev");
-//		list = empRepo.findBySalaryGreaterThan(6000);
+//		list = empRepo.findBySalaryGreaterThan(6000); //Double타입이니까 20000.0으로 하면 좀 더 좋음
 //		list=empRepo.findBySalaryLessThan(4000);
 //		list=empRepo.findBySalaryBetween(2000, 3000);
 //		list=empRepo.findByHireDateBefore(LocalDate.of(2003, 1, 5));
 //		list=empRepo.findByHireDateAfter(LocalDate.of(2008, 1, 1));
-		list = empRepo.findByHireDateBetween(LocalDate.of(2008, 1, 1), LocalDate.of(2008, 5, 1));
+//		list = empRepo.findByHireDateBetween(LocalDate.of(2008, 1, 1), LocalDate.of(2008, 5, 1));
+//		list=empRepo.findByDepartmentDepartmentName("IT");
+//		list=empRepo.findByDepartmentLocationCity("Seattle");
+//		list = empRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase("ev", "gi");
+//		list=empRepo.findByname("ev", "et");
+//		list=empRepo.findByName2("ev");	
+//		list=empRepo.findByDeptName("NOC");
+//		list=empRepo.findByCity("Seattle");
+		list=empRepo.findByCountry("Canada");
 		list.forEach(System.out::println);
 		
 	}
