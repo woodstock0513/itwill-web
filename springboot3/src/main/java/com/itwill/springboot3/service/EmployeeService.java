@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot3.domain.Employee;
 import com.itwill.springboot3.domain.Job;
@@ -24,6 +25,7 @@ public class EmployeeService {
 
 	private final EmployeeRepository empRepo;
 	
+	@Transactional(readOnly = true) //읽기전용으로만 사용하고 변경하지 않을 것이다!
 	public Page<EmployeeListItemDto> read(int pageNo, Sort sort){
 		log.info("read(pageNo={}, sort={})",pageNo,sort);
 //		List<Employee> list = empRepo.findAll();
@@ -44,7 +46,7 @@ public class EmployeeService {
 		return page.map(EmployeeListItemDto::fromEntity);
 	}
 	
-	
+	@Transactional(readOnly = true)
 	public Employee readById(int id) {
 		log.info("readById(id={})",id);
 		return empRepo.findById(id).orElseThrow();
