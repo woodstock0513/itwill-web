@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.springboot3.domain.Employee;
 import com.itwill.springboot3.domain.Job;
+import com.itwill.springboot3.dto.EmployeeListItemDto;
 import com.itwill.springboot3.repository.EmployeeRepository;
 import com.itwill.springboot3.repository.JobRepository;
 
@@ -19,14 +20,23 @@ public class EmployeeService {
 
 	private final EmployeeRepository empRepo;
 	
-	public List<Employee> read(){
+	public List<EmployeeListItemDto> read(){
 		log.info("read()");
-		return empRepo.findAll();
+		List<Employee> list = empRepo.findAll();
+		return list.stream().map(EmployeeListItemDto::fromEntity)  // (x) -> EmployeeListItemDto.fromEntity(x);
+				.toList();
 	}
+	
 	
 	public Employee readById(int id) {
 		log.info("readById(id={})",id);
 		return empRepo.findById(id).orElseThrow();
+	}
+	
+	/*
+	public List<Employee> read(){
+		log.info("read()");
+		return empRepo.findAll();
 	}
 	
 	private final JobRepository jobRepo;
@@ -36,5 +46,5 @@ public class EmployeeService {
 		return jobRepo.findAll();
 	}
 	
-	
+	*/
 }
