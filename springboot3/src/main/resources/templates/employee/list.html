@@ -8,7 +8,7 @@
         
         
         <main>
-            <table>
+            <table  class="table table-hover">
                 <thead>
                     <tr>
                         <th>사번</th>
@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="emp : ${employees}" th:object="${emp}">
+                    <tr th:each="emp : ${page}" th:object="${emp}">
                         <td><a th:text="*{employeeId}" th:href="@{/employee/details/{id}(id=*{employeeId})}"></a></td>
                         <td><a th:text="*{employeeName}" th:href="@{/employee/details/{id}(id=*{employeeId})}"></a></td>
                         <td th:text="*{phoneNumber}" ></td>
@@ -30,6 +30,27 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <div class="mt-2">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"
+                        th:classappend="${!page.hasPrevious} ? 'disabled' ">
+                        <a class="page-link" th:href="@{|?p=${page.number-1}|}">이전</a>
+                    </li>
+                    <li class="page-item"
+                        th:each="pageNo : ${#numbers.sequence(0,page.totalPages - 1)}"
+                        th:if="${pageNo >= page.number - 5 && pageNo < page.number + 5}"
+                        th:classappend="${pageNo == page.number} ? 'active' ">
+                        <a class="page-link" th:href="@{|?p=${pageNo}|}" 
+                            th:text="${pageNo + 1}"></a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${!page.hasNext} ? 'disabled' ">
+                        <a class="page-link" th:href="@{|?p=${page.number+1}|}">이후</a>
+                    </li>
+                </ul>
+            </div>
+            
         </main>
         
         

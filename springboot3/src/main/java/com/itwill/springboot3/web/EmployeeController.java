@@ -31,7 +31,7 @@ public class EmployeeController {
 		log.info("employeeList(pageNo={})",pageNo);
 		//서비스(비즈니스) 계층의 메서드를 호출해서 뷰에 전달한 직원 목록을 가져옴
 		Page<EmployeeListItemDto> list = empSvc.read(pageNo, Sort.by("id"));
-		model.addAttribute("employees", list);
+		model.addAttribute("page", list);
 	}
 	
 	@GetMapping("/details/{id}")
