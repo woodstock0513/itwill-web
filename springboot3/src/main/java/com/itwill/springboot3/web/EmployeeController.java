@@ -2,6 +2,8 @@ package com.itwill.springboot3.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +27,10 @@ public class EmployeeController {
 	private final EmployeeService empSvc;
 	
 	@GetMapping("/list")
-	public void employeeList( Model model) {
-		log.info("employeeList()");
+	public void employeeList(@RequestParam(name = "p", defaultValue = "0") int pageNo, Model model) {
+		log.info("employeeList(pageNo={})",pageNo);
 		//서비스(비즈니스) 계층의 메서드를 호출해서 뷰에 전달한 직원 목록을 가져옴
-		List<EmployeeListItemDto> list = empSvc.read();
+		Page<EmployeeListItemDto> list = empSvc.read(pageNo, Sort.by("id"));
 		model.addAttribute("employees", list);
 	}
 	
