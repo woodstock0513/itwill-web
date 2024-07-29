@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+	<head>
+		<th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="~{/layout/fragments :: pageHeader('post list')}"></th:block>
+        <!-- TODO: 목록(테이블) -->
+        <main>
+            <div class="card">
+                <div class="card-body">
+                    <table class = "mt-2 table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>title</th>
+                                <th>author</th>
+                                <th>modTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="post : ${list}" th:object="${post}">
+                                <td th:text="*{id}"></td>
+                                <td th:text="*{title}"></td>
+                                <td th:text="*{author}"></td>
+                                <td th:text="*{#temporals.format(modifiedTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                        </tbody>
+                    
+                    </table>
+                </div>
+            </div>
+        </main>
+        <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+	</body>
+</html>
