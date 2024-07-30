@@ -1,13 +1,17 @@
 package com.itwill.springboot5.web;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
+import com.itwill.springboot5.dto.PostListItemDto;
 import com.itwill.springboot5.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +24,11 @@ public class PostController {
 	private final PostService postSvc;
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
+	public void list(@RequestParam(name = "p", defaultValue = "0") int pageNo, Model model) {
+		log.info("list(pageNo = {})",pageNo);
 		//TODO: 서비스 계층의 메서드를 호출하여 뷰에 포스트 목록을 전달
-		model.addAttribute("list", postSvc.read());
+		Page<PostListItemDto> list = postSvc.read(pageNo, Sort.by("id").descending());
+		model.addAttribute("page", list);
 	}
 	
 	@GetMapping("/create")

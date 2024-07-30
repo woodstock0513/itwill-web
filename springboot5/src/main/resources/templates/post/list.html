@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="post : ${list}" th:object="${post}">
+                            <tr th:each="post : ${page}" th:object="${post}">
                                 <td th:text="*{id}"></td>
                                 <td th:text="*{title}"></td>
                                 <td th:text="*{author}"></td>
@@ -28,6 +28,7 @@
                         </tbody>
                     
                     </table>
+                    <th:block th:replace="~{/layout/fragments :: pagination}"></th:block>   
                 </div>
             </div>
         </main>
