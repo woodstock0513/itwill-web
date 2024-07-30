@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
 import com.itwill.springboot5.dto.PostListItemDto;
+import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -76,6 +77,25 @@ public class PostService {
 		Post post = postRepo.findById(id).orElseThrow();
 		return post;
 		
+	}
+	
+	@Transactional
+	public void delete(Long id) {
+		log.info("delete(id={})",id);
+		postRepo.deleteById(id);
+	}
+	@Transactional
+	public Post update(PostUpdateDto dto) {
+		log.info("update(dto = {})",dto);
+		//id로 post entity 객체 찾기
+		Post entity = postRepo.findById(dto.getId()).orElseThrow();
+		//db에서 검색한 엔터티 객체의 필드들을 업데이트(수정)
+		entity.update(dto.getTitle(), dto.getContent());
+		
+		//@Transactional 애너테이션을 사용한 경우
+		// db에서 섬색한 entity 객체가 변경되면 update 쿼리가 자동으로 실행됨
+		// 그게 아니면 postRepo.save(entity)를 직접 호출해야함
+		return null;
 	}
 	
 
