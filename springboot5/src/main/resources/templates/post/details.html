@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <th:block th:replace="~{/layout/fragments :: documentHeader}"></th:block>
+    </head>
+    <body>
+        <th:block th:replace="~{/layout/fragments :: pageHeader('post details')}"></th:block>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>포스트 상세보기</h2>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class = "mt-2">
+                        <label class="form-label" for="title">글 번호</label>
+                        <input type="text" class="form-control" id="id" th:value="${post.id}" readonly/>
+                    </div>
+                    <div class = "mt-2">
+                        <label class="form-label" for="title">제목</label>
+                        <input type="text" class="form-control" id="title" th:value="${post.title}" readonly/>
+                    </div>
+                    <div class = "mt-2">
+                        <label class="form-label" for="content">내용</label>
+                        <textarea class="form-control" rows="5" name="content" id="content" readonly th:text="${post.content}" ></textarea>
+                    </div>
+                    <div class = "mt-2">
+                        <label class="form-label" for="createdTime">작성 시간</label>
+                        <input class="form-control" name="createdTime" id="createdTime" readonly  th:value="${#temporals.format(post.createdTime, 'yyyy-mm-dd hh:mm:ss')}"/>
+                    </div>
+                    <div class = "mt-2">
+                        <label class="form-label" for="modifiedTime">수정 시간</label>
+                        <input class="form-control" name="modifiedTime" id="modifiedTime"  th:value="${post.modifiedTime}" readonly/>
+                    </div>
+                    <div class = "mt-2">
+                        <label class="form-label" for="author">작성자</label>
+                        <input class="form-control" name="author" id="author"  th:value="${post.author}" readonly/>
+                    </div>
+                </form>
+                
+                <div class="mt-2">
+                    <a class="btn btn-success form-control" th:href="@{/post/modify(id=${post.id})}">수정하기</a>
+                </div>
+            </div>
+        
+        </div>
+        
+        
+        <th:block th:replace="~{/layout/fragments :: bootstrapJS}"></th:block>
+    </body>
+</html>

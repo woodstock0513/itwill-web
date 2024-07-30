@@ -70,5 +70,13 @@ public class PostService {
 	}
 	*/
 	
+	@Transactional(readOnly = true)
+	public Post readById(Long id) {
+		log.info("readById(id={})",id);
+		Post post = postRepo.findById(id).orElseThrow();
+		return post;
+		
+	}
+	
 
 }
