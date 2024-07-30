@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PostService {
 	private final PostRepository postRepo;
 	
+	@Transactional(readOnly = true) //insert update delete가 아닌 경우 붙이기
 	public List<PostListItemDto> read(){
 		log.info("read()");
 		//TODO: 영속성 계층의 메서드를 호출해서 엔터티들의 리스트를 가져옴
@@ -36,11 +38,22 @@ public class PostService {
 		*/
 	}
 	
-	
+	@Transactional
 	public Post create(PostCreateDto dto){
 		log.info("create");
+		//영속성 계층의 메서드를 호출해서 DB insert 쿼리를 실행
 		Post post = postRepo.save(dto.toEntity());
+		log.info("entity = {}",post);
 		return post;
 	}
+	
+	/*
+	@Transactional
+	public Long create2(PostCreateDto dto) { //return 타입이 다른 경우
+		Long id = postRepo.save(dto.toEntity()).getId();
+		return id;
+	}
+	*/
+	
 
 }

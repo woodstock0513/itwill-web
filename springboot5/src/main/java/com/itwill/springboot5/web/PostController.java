@@ -28,12 +28,12 @@ public class PostController {
 	
 	@GetMapping("/create")
 	public void create(){
-		log.info("create()");
+		log.info("GET: create()");
 	}
 
 	@PostMapping("/create")
 	public String createPost(PostCreateDto dto) {
-		log.info("createPost, dto={}",dto);
+		log.info("POST : create(dto={})",dto);
 		Post post = postSvc.create(dto);
 		log.info("Post = {}",post);
 		
