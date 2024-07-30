@@ -46,12 +46,14 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 	
-	@GetMapping("/details")
+	@GetMapping({"/details","/modify"})
 	public void details(@RequestParam(name = "id") Long id, Model model) {
 		log.info("details(id={})",id);
 		Post post = postSvc.readById(id);
 		model.addAttribute("post", post);
-
+		
+		//-> view의 이름은 요청주소에 따라 정해짐
+		//details -> details.html  modify-> modify.html임!
 	}
 	
 }
