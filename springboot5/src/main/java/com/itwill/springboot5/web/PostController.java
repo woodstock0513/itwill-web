@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.springboot5.domain.Post;
 import com.itwill.springboot5.dto.PostCreateDto;
 import com.itwill.springboot5.dto.PostListItemDto;
+import com.itwill.springboot5.dto.PostSearchRequestDto;
 import com.itwill.springboot5.dto.PostUpdateDto;
 import com.itwill.springboot5.service.PostService;
 
@@ -70,5 +71,16 @@ public class PostController {
 		postSvc.update(dto);
 		return "redirect:/post/details?id="+dto.getId();
 	}
+	
+	@GetMapping("/search")
+	public String search(PostSearchRequestDto dto, Model model) {
+		log.info("search(dto={})",dto);
+		
+		//TODO
+		Page<PostListItemDto> posts = postSvc.search(dto, Sort.by("id").descending());
+		model.addAttribute("page", posts);
+		return "post/list";
+	}
+	
 	
 }
