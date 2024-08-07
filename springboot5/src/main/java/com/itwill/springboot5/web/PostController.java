@@ -2,6 +2,7 @@ package com.itwill.springboot5.web;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,11 +40,14 @@ public class PostController {
 		
 	}
 	
+	// @PreAuthorize("isAuthenticated()") //-> role에 상관없이 아이디/비밀번호로만 인증.
+	@PreAuthorize("hasRole('USER')")  //-> role이 일치하는 아이디/비밀번호 인증.
 	@GetMapping("/create")
 	public void create(){
 		log.info("GET: create()");
 	}
-
+	
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/create")
 	public String createPost(PostCreateDto dto) {
 		log.info("POST : create(dto={})",dto);
@@ -53,6 +57,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping({"/details","/modify"})
 	public void details(@RequestParam(name = "id") Long id, Model model) {
 		log.info("details(id={})",id);
@@ -62,14 +67,14 @@ public class PostController {
 		//-> view의 이름은 요청주소에 따라 정해짐
 		//details -> details.html  modify-> modify.html임!
 	}
-	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/delete")
 	public String delete(@RequestParam(name = "id") Long id) {
 		log.info("delete(id={})",id);
 		postSvc.delete(id);
 		return "redirect:/post/list";
 	}
-	
+	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/update")
 	public String update(PostUpdateDto dto) {
 		log.info("update(dto={})",dto);
