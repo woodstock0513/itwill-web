@@ -58,7 +58,7 @@ public class Member extends BaseTimeEntity {
 	private Set<MemberRole> roles = new HashSet<>(); //null이되면안됨
 //	entity이름이 member, set 이름이 roles -> 테이블명 : member_roles
 	
-	//roles이 null이면 밑의 메서드에서 exception 발생함... -> null이 되지 않ㄷㅎㅀㄱ
+	//roles이 null이면 밑의 메서드에서 exception 발생함... -> null이 되지 않도록
 	public Member addRole(MemberRole role) {
 		roles.add(role); //Set<>에 원소 추가
 		return this;

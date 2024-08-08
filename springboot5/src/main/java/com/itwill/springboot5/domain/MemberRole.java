@@ -2,7 +2,8 @@ package com.itwill.springboot5.domain;
 
 public enum MemberRole {
 	USER("ROLE_USER"),  //public static final MemberRole USER  = new MemberRole("ROLE_USER");랑 같음
-	ADMIN("ROLE_ADMIN");
+	ADMIN("ROLE_ADMIN"),
+	GUEST("ROLE_GUEST");  //이렇게 얼마든지 추가 가능
 	
 	private String authority;
 	

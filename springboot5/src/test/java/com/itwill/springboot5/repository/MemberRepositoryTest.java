@@ -54,7 +54,7 @@ public class MemberRepositoryTest {
 		log.info("save 호출 후 = {}, {}",m, m.getRoles());
 	}
 	
-	@Test @Transactional
+//	@Test @Transactional - fetch type이 lazy라서..
 	public void testFindAll() {
 		List<Member> list = memberRepo.findAll();
 		//members랑 member_roles 테이블에서 정보를 가져옴
@@ -62,6 +62,14 @@ public class MemberRepositoryTest {
 		
 	}
 	
+	@Test
+	public void testFindByUsername() {
+		Member mem = memberRepo.findByUsername("test1").orElseThrow();
+		log.info("mem = {} / {}",mem, mem.getRoles());
+		
+		Member mem2 = memberRepo.findByUsername("test2").get();
+		log.info("mem2 = {} / {}", mem2, mem2.getRoles());
+	}
 	
 	
 
