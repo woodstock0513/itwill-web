@@ -41,7 +41,7 @@ public class PostController {
 	}
 	
 	// @PreAuthorize("isAuthenticated()") //-> role에 상관없이 아이디/비밀번호로만 인증.
-	@PreAuthorize("hasRole('USER')")  //-> role이 일치하는 아이디/비밀번호 인증.
+	@PreAuthorize("hasRole('USER')")  //-> role이 일치하는 아이디/비밀번호 인증. 실제로 비교하는 건 role_user임 
 	@GetMapping("/create")
 	public void create(){
 		log.info("GET: create()");

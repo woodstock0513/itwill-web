@@ -38,7 +38,8 @@
                     </div>
                 </form>
                 
-                <div class="mt-2  d-flex justify-content-end">
+                <!-- post 작성자와 로그인 사용자가 같은 경우에만 삭제/업데이트 가능하도록 -->
+                <div class="mt-2  d-flex justify-content-end" th:if="*{author eq #authentication.name}">
                     <button class="btn btn-outline-danger " id="btnDelete">삭제하기</button>
                     
                     <button class="btn btn-outline-success " id="btnUpdate">수정완료</button>

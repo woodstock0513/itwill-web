@@ -34,6 +34,8 @@ public class SecurityConfig {
     // UserDetailsService 인터페이스를 구현하는 서비스 클래스와
     // UserDetails 인터페이스를 구현하는 엔터티 클래스가 있어야 함.
     // 사용자 엔터티와 사용자 서비스를 구현하기 전에 테스트 용도로 사용할 코드.
+    
+    /*
     @Bean
     UserDetailsService inMemoryUserDetailsService() {
         // 애플리케이션이 동작 중에 메모리에 임시 저장하는 사용자 객체를 생성:
@@ -55,7 +57,7 @@ public class SecurityConfig {
         // User 타입 객체 3개를 가지고 있는 UserDetailsService 객체를 생성하고 리턴.
         return new InMemoryUserDetailsManager(user1, user2, user3);
     }
-    
+    */
     // 스프링 시큐리티 필터 체인 객체(bean)
     // 로그인/로그아웃, 인증 필터에서 필요한 설정을 구성.
     // - 로그인 페이지(뷰), 로그아웃 페이지 설정.
@@ -83,7 +85,7 @@ public class SecurityConfig {
         // 2. 컨트롤러 메서드에서 애너테이션으로 설정.
         //    (1) SecurityConfig 빈에 @EnableMethodSecurity 애너테이션을 설정.
         //    (2) 각각의 컨트롤러 메서드에서 @PreAuthorize 또는 @PostAuthorize 애너테이션을 설정.
-        /*
+        /* 2번으로 할 거라서 밑의 메서드 주석처리함!!
         http.authorizeHttpRequests((auth) -> 
             // 모든 요청 주소에 대해서 (role에 상관없이) 아이디/비밀번호 인증을 하는 경우:
             // auth.anyRequest().authenticated()

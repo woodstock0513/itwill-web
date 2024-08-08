@@ -1,8 +1,15 @@
 package com.itwill.springboot5.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -32,7 +39,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "members")
-public class Member extends BaseTimeEntity {
+public class Member extends BaseTimeEntity implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +80,24 @@ public class Member extends BaseTimeEntity {
 	public Member clearRoles() {
 		roles.clear(); //Set<>의 모든 원소를 지움
 		return this;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//(1) 반복문 이용하기
+//		ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+//		for (MemberRole r : roles) {
+//			GrantedAuthority auth = new SimpleGrantedAuthority(r.getAuthority());
+//			authorities.add(auth);
+//		}
+		//(2) 람다표현식 이용하기
+		//List<? extends GrantedAuthority>로 써도 됨. <> 안에 들어갈 것이 GA를 상속받는 객체라는 의미
+		List<SimpleGrantedAuthority> authorities = roles.stream() //role을 auth으로 변환해주기!!
+				.map((r)-> new SimpleGrantedAuthority(r.getAuthority()))
+				.toList();
+		
+		
+		return authorities;
 	}
 	
 	

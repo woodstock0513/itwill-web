@@ -114,6 +114,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
     
     function makeCommentElements(data,pageNo){
+        //로그인 사용자 정보 -> 댓글 삭제, 수정 버튼에 이용
+        const authUser = document.querySelector('span#authUser').innerText;
+        
         //댓글 목록을 추가할 div 요소
         const divComments = document.querySelector('div#divComments');
         let htmlStr = ''; //div에 삽입할 html 코드(댓글 목록)
@@ -128,13 +131,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     <div class="mt-2">
                         <textarea class="form-control">${comment.ctext}</textarea>
                     </div>
-                    <div class="mt-2">
-                        <button class="btnDelete btn-outline-danger btn-sm">삭제</button>
-                        <button class="btnUpdate btn-outline-primary btn-sm">수정</button>
+                    `;
+                    //로그인 사용자와 댓글 사용자가 같은 경우에만 삭제/수정버튼을 보여줌
+                    if (authUser === comment.writer){
+                        htmlStr += `<div class="mt-2" >
+                        <button class="btnDelete btn btn-outline-danger btn-sm">삭제</button>
+                        <button class="btnUpdate btn btn-outline-primary btn-sm">수정</button>
                     </div>
                 </div>
             </div>
             `;
+                    } else {
+                        htmlStr += `</div>
+                                </div>
+                                `;
+                    }
+                    
         }
         if (pageNo==0){
             //댓글목록 첫번째 페이지면 기존 내용을 지우고 새로 작성

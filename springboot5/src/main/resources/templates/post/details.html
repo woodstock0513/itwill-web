@@ -38,7 +38,7 @@
                     </div>
                 </form>
                 
-                <div class="mt-2">
+                <div class="mt-2" th:if="${post.author eq #authentication.name}">
                     <a class="btn btn-success form-control" th:href="@{/post/modify(id=${post.id})}">수정하기</a>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         <textarea class="form-control" id="commentText" rows="3" placeholder="댓글 내용 작성"></textarea>
                         
                         <!-- TODO: 로그인 사용자 이름으로 설정 -->
-                        <input class="d-none" id="commentWriter" value="admin" readonly>
+                        <input class="d-none" id="commentWriter" th:value="${#authentication.name}" readonly>
                     </div>
                     <div class="col-2">
                         <button class="btn btn-outline-success form-control" id="btnRegisterComment"  >등록</button>

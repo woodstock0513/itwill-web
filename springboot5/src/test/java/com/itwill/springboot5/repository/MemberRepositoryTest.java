@@ -36,15 +36,15 @@ public class MemberRepositoryTest {
 		log.info(passwordEncoder.toString());
 	}
 	
-//	@Test
+	@Test
 	public void testSave() {
 		//엔터티 객체를 DB members 테이블에 저장
 		
 		
-		Member m = Member.builder().username("test2")
-				.password(passwordEncoder.encode("2222")).email("222@naver.com").build();
+		Member m = Member.builder().username("admin")
+				.password(passwordEncoder.encode("0000")).email("admin@naver.com").build();
 		
-		m.addRole(MemberRole.USER);
+//		m.addRole(MemberRole.USER);
 		m.addRole(MemberRole.ADMIN);
 		log.info("save 호출 전 = {}, {}",m,m.getRoles());
 		m = memberRepo.save(m); //저장한 걸 m에 저장
@@ -62,7 +62,7 @@ public class MemberRepositoryTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void testFindByUsername() {
 		Member mem = memberRepo.findByUsername("test1").orElseThrow();
 		log.info("mem = {} / {}",mem, mem.getRoles());
@@ -70,7 +70,6 @@ public class MemberRepositoryTest {
 		Member mem2 = memberRepo.findByUsername("test2").get();
 		log.info("mem2 = {} / {}", mem2, mem2.getRoles());
 	}
-	
 	
 
 }

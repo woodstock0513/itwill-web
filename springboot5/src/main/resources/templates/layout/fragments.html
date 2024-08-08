@@ -50,7 +50,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
                                 <li class="nav-item">
                                 <!-- spring security에서 로그아웃이 구현된 주소 -->
                                     <a class="nav-link " th:href="@{/logout}" >
-                                    <span class="text-secondary" sec:authentication = "name"></span>
+                                    <span class="text-secondary" sec:authentication = "name" id="authUser"></span>
                                     <span class="mx-1 text-primary">로그아웃</span></a>
                                 </li>
                             </th:block>
